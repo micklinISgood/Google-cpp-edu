@@ -6,6 +6,7 @@
 #include <time.h>       /* time */
 using namespace std;
 int gcd(int, int);
+int gcdit(int, int);
 
 int main() {
   int a,b,gcdNum;
@@ -32,8 +33,8 @@ int main() {
       // exit the do while loop
     }
     
-    gcdNum = gcd(a,b); 
-    cout << "gcd( "<<a <<","<<b<<"):"<<gcdNum<<endl; 
+    gcdNum = gcdit(a,b); 
+    cout << "gcd("<<a <<","<<b<<"):"<<gcdNum<<endl; 
 
 
   } while (1);
@@ -49,4 +50,17 @@ int gcd(int a, int b){
   if (abs(b) > abs(a)) return gcd(a, b%a);
   return a; 
 	
+}
+
+int gcdit(int a, int b){
+  //cout << "gcd( "<<a <<","<<b<<"):"<<endl;
+  int tmp_a=a, tmp_b=b;
+  while(!(tmp_a==1||tmp_b==1) && tmp_a !=0 && tmp_b !=0){
+	if(abs(tmp_a)>abs(tmp_b)) tmp_a = tmp_a% tmp_b;
+        else if( abs(tmp_a)<abs(tmp_b)) tmp_b = tmp_b% tmp_a;
+	else if( abs(tmp_a)==abs(tmp_b)) return abs(tmp_a);
+  }  
+  if (tmp_a==0) return abs(tmp_b);
+  if (tmp_b==0) return abs(tmp_a);  
+  return 1;
 }
