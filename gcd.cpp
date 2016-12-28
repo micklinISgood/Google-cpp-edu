@@ -8,6 +8,18 @@ using namespace std;
 int gcd(int, int);
 int gcdit(int, int);
 
+// A non-recursive version of Euclid's algorithm
+int gcdgoogle(int a, int b) {
+  int temp;
+  while (b != 0) {
+    cout << a<<","<<b<<endl;
+    temp = a % b;
+    a = b;
+    b = temp;
+  }
+  return(a);
+}
+
 int main() {
   int a,b,gcdNum;
   char iSecret;
@@ -33,7 +45,7 @@ int main() {
       // exit the do while loop
     }
     
-    gcdNum = gcdit(a,b); 
+    gcdNum = gcdgoogle(a,b); 
     cout << "gcd("<<a <<","<<b<<"):"<<gcdNum<<endl; 
 
 
