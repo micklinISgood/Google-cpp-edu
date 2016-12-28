@@ -5,25 +5,26 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 using namespace std;
+int gcd(int, int);
 
 int main() {
-  int a,b,iSecret;
-  /* initialize random seed: */
-  srand (time(NULL));
+  int a,b,gcdNum;
+  char iSecret;
 
-  /* generate secret number between 1 and 100: */
-  iSecret = rand() % 100+1;
   // Enter the do while loop and stay there until either
   // a non-numeric is entered, or -1 is entered. Note that
   // cin will accept any integer, 4, 40, 400, etc.
   do {
-    cout << "Enter two numbers for gcd"<<endl;
+    cout << "Enter two numbers for gcd, ctrl-c for exit"<<endl;
+    
     // The following line accepts input from the keyboard into
     // variable guess.
     // cin returns false if an input operation fails, that is, if
     // something other than an int (the type of guess) is entered.
+
+	
     if (!(cin >> a >>b)) {
-      cout << "You entered a non-numeric. Exiting..." << endl;
+      cout << "You entered a non-numeric. Retry..." << endl;
       //break;
       cin.clear();
       cin.ignore(1000,'\n');
@@ -31,10 +32,21 @@ int main() {
       // exit the do while loop
     }
     
-    cout << "a: "<<a <<",b:"<<b; 
+    gcdNum = gcd(a,b); 
+    cout << "gcd( "<<a <<","<<b<<"):"<<gcdNum<<endl; 
 
 
-  } while (iSecret != a);
-  cout << "Congratulations!" << endl;
+  } while (1);
   return 0;
+}
+
+int gcd(int a, int b){
+  //cout << "gcd( "<<a <<","<<b<<"):"<<endl; 
+  if (a==1 || b==1) return 1;
+  if (a==0) return abs(b);
+  if (b==0) return abs(a); 
+  if (abs(a) > abs(b)) return gcd(a%b, b);
+  if (abs(b) > abs(a)) return gcd(a, b%a);
+  return a; 
+	
 }
