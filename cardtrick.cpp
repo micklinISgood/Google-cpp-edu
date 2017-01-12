@@ -37,7 +37,16 @@ int main(){
 		
 		digit[i]= sum[i]+sum[(i+1)%3];
 	}
+	
 	for (auto it = begin(digit); it != end(digit);++it){
+		//cout << *it <<endl;
+		while(*it%2 ==1){
+			
+			if(*it +11 <20 ) *it+=11;
+			if(*it -11 >=0) *it-=11; 
+			if(*it==9) break;
+		}
+		
 		cout<< *it/2 << endl;
 	}
 	
