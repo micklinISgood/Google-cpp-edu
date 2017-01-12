@@ -33,6 +33,10 @@ using namespace std;
 // constants
 #define velocity 200.0  
 #define gravity 32.2
+const int kNumShells = 10;  // allowed 10 shells per target
+const int kMinDist = 200;  // min distance for a target
+const int kMaxDist = 900;  // max distance for a target
+const double kPi = 3.1415;
 
 void StartUp(){
 	cout << "Welcome to Artillery.\nYou are in the middle of a war and being charged by thousands of enemies.\n"
@@ -40,34 +44,47 @@ void StartUp(){
 	"Let\'s begin...\n";
 }   
 
+int init_enemy(){
+	srand (time(NULL));
+	int dist = rand() % kMaxDist +kMinDist;
+	cout << "The enemy is "<< dist << " feet away!!!\n";
+	return dist;
+	
+}
+int checkshot(){
 
-bool hit(int dist, float in_angle){
-
+	double in_angle;
+	cout<<"What angle? " << endl;
+	if(!(cin>>in_angle)) return -1;
+	 // Convert to radians.
+	in_angle = (in_angle*kPi)/180.0;
 	// in_angle is the angle the player has entered, converted to radians.
 	double time_in_air = (2.0 * velocity * sin(in_angle)) / gravity;
-	int distance = round((velocity * cos(in_angle)) * time_in_air);
-	if (distance == dist){ 
-		cout<<"You hit him!!!\n";
-		return true;
-	}else if(distance < dist){
-		cout<<"You under shot by "<<dist-distance<<endl;
-	}else if(distance > dist){
-		cout<<"You over shot by "<<distance-dist<<endl;
-	}
-	return false;
+	return (int) round((velocity * cos(in_angle)) * time_in_air);
 }
 
 int Fire(){
 	float guess;
-	int enemy = rand() % 1000+1;
-	cout << "The enemy is "<< enemy << " feet away!!!\n";
-	while(1){
-		cout<<"What angle?";
-		cin >> guess;
-		if(hit(enemy,guess)) break;
-	}			
-	
-	return 1;
+	int target = init_enemy();
+	int shots = kNumShells; 
+	while(shots-- > 0){
+
+		int dist = checkshot();
+		if(abs(dist-target)<=1){
+			cout <<"You hit him!!!\n";
+			cout <<"It took you "<< kNumShells-shots << " shots." << endl;
+			return 1;
+		}else{
+			if(target < dist){
+				cout<<"You under shot by "<<dist-target<<endl;
+			}else{
+				cout<<"You over shot by "<<target-dist<<endl;
+			}
+		
+		}			
+	}
+  	cout << "You have run out of ammo..." << endl;
+	return 0;
 	
 }
 
@@ -75,9 +92,9 @@ int main(){
 	char done;
 	StartUp();
 	int killed = 0;
-        srand (time(NULL));
 	do {
 		killed += Fire(); // Fire() contains the main loop of each round.
+		cout << "You have killed " << killed << " of the enemy." << endl;
   		cout << "I see another one, care to shoot again? (Y/N) " << endl;
   		cin >> done;
 	} while (done != 'n');
