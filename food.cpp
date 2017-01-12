@@ -17,8 +17,56 @@ using namespace std;
 
 int main(){
 	char loophole[] = "ARZM";
-	for(int i =0; i < sizeof(loophole)/sizeof(*loophole); i ++){
-		cout << loophole[i];
+	// loophole[len] == '\0'
+	int len = sizeof(loophole)/sizeof(*loophole)-1;
+	for(int i =0; i < len; i ++){
+		if(i==0){
+			switch(loophole[i]-'A'){
+				case 0:
+					cout << "Jan ";
+					break;
+				case 1:
+					cout << "Feb ";
+					break;
+				case 2:
+					cout << "Mar ";
+					break;
+				case 3:
+					cout << "Apr ";
+					break;
+				case 4:
+					cout << "May ";
+					break;
+				case 5:
+					cout << "Jun ";
+					break;
+				case 6:
+					cout << "Jul ";
+					break;
+				case 7:
+					cout << "Aug ";
+					break;
+				case 8:
+					cout << "Sep ";
+					break;
+				case 9:
+					cout << "Oct ";
+					break;
+				case 10:
+					cout << "Nov ";
+					break;
+				case 11:
+					cout << "Dec ";
+					break;
+			}	
+		}else if (i == len -1){
+			cout <<" "<<(int)(loophole[i]-'A')+1996 << endl;
+		}else{
+
+			cout << loophole[i]-'Q';
+		}
+
+		
 	}
 	
 	return 0;
