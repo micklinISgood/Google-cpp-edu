@@ -17,6 +17,9 @@ using namespace std;
 
 int main(){
 	char loophole[] = "ARZM";
+	/*
+Doing sizeof( myArray ) will get you the total number of bytes allocated for that array. You can then find out the number of elements in the array by dividing by the size of one element in the array: sizeof( myArray[0] ) myArray[0] == * myArray
+	*/
 	// loophole[len] == '\0'
 	int len = sizeof(loophole)/sizeof(*loophole)-1;
 	for(int i =0; i < len; i ++){
