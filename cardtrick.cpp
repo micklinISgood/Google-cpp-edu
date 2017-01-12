@@ -33,8 +33,13 @@ int main(){
  echo "alias g++='g++ -std=c++11'" >> ~/.bashrc
  source ~/.bashrc
 */
-	for(auto it = begin(sum); it != end(sum);it++){
-		cout<< *it <<" ";
+	for(int i = 0; i < 3;i++){
+		
+		digit[i]= sum[i]+sum[(i+1)%3];
 	}
+	for (auto it = begin(digit); it != end(digit);++it){
+		cout<< *it/2 << endl;
+	}
+	
 	return 0;
 }
