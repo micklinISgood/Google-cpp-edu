@@ -17,12 +17,19 @@ int reverse(int a){
 }
 
 int main(){
-	int a;
-	cout << "show magic number of :";
+	int a,b,c;
+	cout << "input number :";
 	if(!(cin>>a)){
 		cout<< "not a number"; return 0;
 	}
-	cout << reverse(a) << endl;
+	b = reverse(a); 
+	cout << "reverse it:"<<b << endl;
+	c = a - b;
+
+	cout << "subtract:"<<a <<" - "<<b << " = "<< c<< endl;
+	b = reverse(c); 
+	cout << "add:"<<c <<" + "<<b << " = "<< c+b << endl;
+
 
 	return 0;
 }
